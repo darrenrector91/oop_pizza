@@ -1,37 +1,36 @@
 // console.log('client sourced!');
 
-// class Restaurant {
-//     constructor() {
-//         this.pizza = pizza;
-//         this.order =order;
-//     }
-
-// }
-
 class Pizza {
-    constructor(ingredient1 = "cheese", ingredient2, size, crust) {
-        this.ingredient1 = ingredient1;
-        this.ingredient2 = ingredient2;
-        this.size = size;
-        this.crust = crust;
+    constructor(ingredients = "cheese", size, crust, ingredientCount = ingredients.length) {
+        this.ingredients = [ingredients];
+        this.ingredientCount = ingredientCount;
+    }
+
+    ingredientCt() {
+        return this.ingredientCount;
     }
 }
 
-let pepperoniPizza = new Pizza();
-let comboPizza = new Pizza('pepperoni', 'sausage', 14, 'original');
-console.log(pepperoniPizza);
+let comboPizza = new Pizza(['pepperoni', 'sausage', 'mushroom'], 14, 'original');
 console.log(comboPizza);
 
-
-
-class Order {
-    constructor(numberPizzas, cost, total = cost * numberPizzas) {
-        this.numberPizzas = numberPizzas;
+class Order extends Pizza {
+    constructor(pizzaCount, cost, total = cost * pizzaCount) {
+        console.log('inside orders');
+        
+        super(['pineapple']);
+        this.pizzaCount = pizzaCount;
         this.cost = cost;
         this.total = total;
-        
+
     }
-}
+    ingredientCt() {
+        console.log(super.ingredientCt());
+        console.log(`${this.ingredientCount} is the number of ingredients`);
+
+
+    }
+} 
 
 let myPizza = new Order(2, 10.99);
 console.log(myPizza);
